@@ -1,40 +1,34 @@
-Python 3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)] on win32
-Type "help", "copyright", "credits" or "license()" for more information.
+# Quiz Game
 
-= RESTART: C:/Users/konde/AppData/Local/Programs/Python/Python312/python intern.py
-Welcome to the Quiz Game!
+questions = {
+    "What is the capital of France?": ["London", "Paris", "Berlin", "Madrid"],
+    "Who wrote 'Hamlet'?": ["Shakespeare", "Milton", "Dickens", "Wilde"],
+    "What is the largest mammal?": ["Elephant", "Whale", "Giraffe", "Lion"]
+}
 
-What is 2+2?
-1. 1
-2. 2
-3. 3
-4. 4
-Your answer (1-4): 4
-Correct!
+def ask_question(question, options, correct_answer):
+    print(question)
+    for idx, option in enumerate(options):
+        print(f"{idx + 1}. {option}")
+    user_answer = input("Enter your answer (1-4): ")
+    if user_answer.isdigit() and 1 <= int(user_answer) <= 4:
+        user_answer_index = int(user_answer) - 1
+        if options[user_answer_index] == correct_answer:
+            print("Correct!")
+            return 1
+        else:
+            print(f"Wrong! The correct answer is: {correct_answer}")
+            return 0
+    else:
+        print("Invalid input. Please enter a number from 1 to 4.")
+        return 0
 
-What is the capital of France?
-1. Paris
-2. London
-3. Berlin
-4. Rome
-Your answer (1-4): 3
-Incorrect. The correct answer is: 1.
+def run_quiz(questions):
+    total_score = 0
+    for question, options in questions.items():
+        correct_answer = options[1]  # Assuming the correct answer is always the second option
+        total_score += ask_question(question, options, correct_answer)
+    print(f"Quiz completed! Your total score is: {total_score}")
 
-What is the powerhouse of the cell?
-1. Mitochondria
-2. Nucleus
-3. Ribosome
-4. Golgi Apparatus
-Your answer (1-4): 2
-Incorrect. The correct answer is: 1.
-
-Your final score is: 1/3
->>> 
-= RESTART: C:/Users/konde/AppData/Local/Programs/Python/Python312/python intern.py
-Welcome to the Quiz Game!
-
-What is 2+2?
-1. 1
-2. 2
-3. 3
-4. 4
+# Running the quiz
+run_quiz(questions)
